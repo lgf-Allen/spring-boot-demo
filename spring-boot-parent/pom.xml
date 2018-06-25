@@ -88,4 +88,7 @@
             </plugins>
         </pluginManagement>
     </build>
+    <modules>
+        <module>../spring-boot-hello</module>
+    </modules>
 </project>
