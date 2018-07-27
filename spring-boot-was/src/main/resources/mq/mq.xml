@@ -14,6 +14,8 @@
     </bean>
     <!-- 发送队列，同时监听该队列 -->
     <jee:jndi-lookup id="jms/omsReplyQueue" jndi-name="jms/omsMonitorReplyQueue" />
+    
+    <!-- 此处的springframework connectionFactory id,默认为connnectionFactory,如果不是,需要添加属性primary=true,否则spring boot项目会在启动时,初始jmsTemplate失败 -->
     <bean id="omsMonitorConnectionFactory" primary="true" class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter"
         lazy-init="true">
         <property name="targetConnectionFactory" ref="omsMonitorJndiConnectionFactory" />
