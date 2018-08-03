@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" monitorInterval="30" debug="true">
+    <Properties>
+        <Property name="contextName">spring-boot-log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d ${contextName} [%thread] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <RollingFile name="RollingFileInfo" fileName="applog/logs/${contextName}.txt"
+            filePattern="applog/logs/${contextName}-%d{yyyy-MM-dd}-%i.txt">
+            <PatternLayout pattern="%d ${contextName} [%thread] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="100">
+                <Delete basePath="applog/logs" maxDepth="1">
+                    <IfFileName glob="${contextName}-*.txt">
+                        <IfLastModified age="2m">
+                            <IfAny>
+                                <IfAccumulatedFileSize exceeds="1GB" />
+                                <IfAccumulatedFileCount exceeds="100" />
+                            </IfAny>
+                        </IfLastModified>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <Async name="Async">
+            <AppenderRef ref="RollingFileInfo" />
+        </Async>
+    </Appenders>
+    <Loggers>
+        <logger name="com.allen.spring.controller" level="info"></logger>
+        <Root level="info">
+            <appender-ref ref="STDOUT" /> 
+            <appender-ref ref="Async" />
+        </Root>
+    </Loggers>
+</Configuration>
