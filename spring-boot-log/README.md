@@ -13,6 +13,6 @@
         # 指定日志输出文件 ，但此时日志依然会打印到控制台 
         logging.file=${user.home}/logs/spring-boot-log.log
         
-![logfile](src/test/resouces/logfile.jpg)
+![logfile](src/test/resources/logfile.jpg)
         
 
