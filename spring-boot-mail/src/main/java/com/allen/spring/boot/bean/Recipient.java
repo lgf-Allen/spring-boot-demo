@@ -3,6 +3,9 @@
  */
 package com.allen.spring.boot.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  * @author meng
  *
@@ -10,12 +13,16 @@ package com.allen.spring.boot.bean;
 public class Recipient {
 
 	// 收件人地址
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
 	private String mailName;
 
 	// 邮件主题
+    @NotNull
 	private String subject;
 
 	// 邮件内容
+    @NotNull
 	private String content;
 
 	public String getMailName() {
