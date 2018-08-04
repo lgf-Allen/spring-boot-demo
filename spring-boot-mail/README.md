@@ -61,6 +61,7 @@
         }
 ### 1.3.3 集成freemarker，发送模板邮件，接口如下：
 > 首先加入如下依赖,然后再写一个ftl格式的模板
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
