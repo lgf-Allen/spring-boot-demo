@@ -40,7 +40,7 @@
             "content": "我是李四，很高兴认识你"
         }
 * Response
-    
+
         {
             "Simple mail sent successfully."
         } 
@@ -57,7 +57,7 @@
             "content": "我是李四，很高兴认识你"
         }
 * Response
-    
+
         {
             "Complex mail sent successfully."
         } 
