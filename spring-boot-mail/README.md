@@ -26,7 +26,7 @@
 
 > 在浏览器获取授权码的流程:`开始`--\>`登录qq邮箱`--\>`设置`--\>`账户`--\>`POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务`--\>` 生成授权码 `--\>`获得授权码`--\>`结束`
 
-## 1.3 在MailControllerImpl写了两个简单的restful接口
+## 1.3 在MailControllerImpl写了3个简单的restful接口
 > 注意:下面的请求路径是针对通过spring-boot内嵌tomcat启动时
 ### 1.3.1 简单的邮件发送功能接口如下：
 * url [http://localhost:8080/simpleMail](http://localhost:8080/simpleMail)
