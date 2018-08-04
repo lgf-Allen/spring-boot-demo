@@ -43,21 +43,39 @@
 
         {
             "Simple mail sent successfully."
-        } 
-        
+        }
 ### 1.3.2 复杂的邮件发送功能：包括发送静态资源，发送附件等功能，接口如下：
 * url [http://localhost:8080/complexMail](http://localhost:8080/complexMail)
 * Method POST
 * RequestBody
-> 注意:*mailName*需要满足`RFC 5322`,符合正则表达式("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");并且**三个字段都不能为null**
+> 注意:*mailName*需要满足`RFC 5322`,符合正则表达式("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");并且*mailName*、*subject*不能为null
 
         {
             "mailName": "xxxxxx@qq.com",
             "subject": "Hello Mail",
-            "content": "我是李四，很高兴认识你"
         }
 * Response
 
         {
             "Complex mail sent successfully."
+        }
+### 1.3.3 集成freemarker，发送模板邮件，接口如下：
+> 首先加入如下依赖,然后再写一个ftl格式的模板
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+* url [http://localhost:8080/templateMail](http://localhost:8080/templateMail)
+* Method POST
+* RequestBody
+> 注意:*mailName*需要满足`RFC 5322`,符合正则表达式("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");并且*mailName*、*subject*不能为null
+
+        {
+            "mailName": "xxxxxx@qq.com",
+            "subject": "Hello Mail",
+        }
+* Response
+
+        {
+            "Template mail sent successfully."
         } 

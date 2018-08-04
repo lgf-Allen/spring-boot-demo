@@ -1,7 +1,14 @@
 package com.allen.spring.boot.controller.impl;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Date;
+
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -17,8 +24,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.allen.spring.boot.bean.Employee;
 import com.allen.spring.boot.bean.Recipient;
 import com.allen.spring.boot.controller.MailController;
+
+import freemarker.core.ParseException;
+import freemarker.template.Configuration;
+import freemarker.template.MalformedTemplateNameException;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateNotFoundException;
 
 /**
  * Created by meng on 2018/8/4.
@@ -26,49 +41,96 @@ import com.allen.spring.boot.controller.MailController;
 @RestController
 public class MailControllerImpl implements MailController {
 
-	private static Logger logger = LoggerFactory.getLogger(MailControllerImpl.class);
-	
-	@Autowired
-	private JavaMailSender mailSender;
-	
+    private static Logger logger = LoggerFactory.getLogger(MailControllerImpl.class);
+
+    @Autowired
+    private JavaMailSender mailSender;
+
     @PostMapping(path = "/simpleMail")
     @Override
-    public String sendSimpleMail(@RequestBody @Valid Recipient recipient ){
-    	Assert.notNull(recipient,"Assert Failed:recipient argument must not be null");
-    	String mailAddress = recipient.getMailName();
-    	String subject = recipient.getSubject();
-    	String text = recipient.getContent();
-    	SimpleMailMessage message = new SimpleMailMessage();
-    	//设置发件人地址
-		message.setFrom("xxxxx@qq.com");
-		message.setTo(mailAddress);
-		message.setSubject(subject);
-		message.setText(text);
-		mailSender.send(message);
-		logger.info("Simple mail sent successfully.");
+    public String sendSimpleMail(@RequestBody @Valid Recipient recipient) {
+        Assert.notNull(recipient, "Assert Failed:recipient argument must not be null");
+        String mailAddress = recipient.getMailName();
+        String subject = recipient.getSubject();
+        String text = recipient.getContent();
+        SimpleMailMessage message = new SimpleMailMessage();
+        // 设置发件人地址
+        message.setFrom("xxxxx@qq.com");
+        message.setTo(mailAddress);
+        message.setSubject(subject);
+        message.setText(text);
+        mailSender.send(message);
+        logger.info("Simple mail sent successfully.");
         return "Simple mail sent successfully.";
     }
 
     @PostMapping(path = "/complexMail")
-	@Override
-	public String sendComplexMail(@RequestBody @Valid Recipient recipient) throws MessagingException {
-		Assert.notNull(recipient,"Assert Failed:recipient argument must not be null");
-		String mailAddress = recipient.getMailName();
-		String subject = recipient.getSubject();
-		String text = recipient.getContent();
-		
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-		
-		helper.setFrom("xxxxxx@qq.com");
+    @Override
+    public String sendComplexMail(@RequestBody @Valid Recipient recipient) throws MessagingException {
+        Assert.notNull(recipient, "Assert Failed:recipient argument must not be null");
+        String mailAddress = recipient.getMailName();
+        String subject = recipient.getSubject();
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+        helper.setFrom("xxxxxx@qq.com");
         helper.setTo(mailAddress);
         helper.setSubject(subject);
-        helper.setText(text);
-        //添加附件，此处是从classpath路径下拿到这个文件
+        // 嵌入静态资源
+        helper.setText("<html><body><img src=\"cid:peppa\" ></body></html>", true);
+        Resource peppa = new ClassPathResource("peppa.jpg");
+        // 此处的"peppa"与静态页面中的"cid:peppa"相对应
+        helper.addInline("peppa", peppa);
+
+        // 添加附件，此处是从classpath路径下拿到这个文件
         Resource file = new ClassPathResource("qq_authKey.png");
         helper.addAttachment(file.getFilename(), file);
+
         mailSender.send(mimeMessage);
         logger.info("Complex mail sent successfully.");
-		return "Complex mail sent successfully.";
-	}
+        return "Complex mail sent successfully.";
+    }
+
+    @PostMapping(path = "/templateMail")
+    @Override
+    public String sendTemplateMail(@RequestBody Recipient recipient) throws TemplateNotFoundException,
+            MalformedTemplateNameException, ParseException, IOException, TemplateException, MessagingException {
+        Assert.notNull(recipient, "Assert Failed:recipient argument must not be null");
+        String mailAddress = recipient.getMailName();
+        String subject = recipient.getSubject();
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        mimeMessage.addRecipients(Message.RecipientType.TO, mailAddress);
+        mimeMessage.setFrom("xxxxxx@qq.com");
+        mimeMessage.setSubject(subject);
+
+        MimeMultipart mixed = new MimeMultipart("mixed");
+        mimeMessage.setContent(mixed);
+        MimeBodyPart content = new MimeBodyPart();
+        mixed.addBodyPart(content);
+
+        MimeMultipart bodyMimeMultipart = new MimeMultipart("related");
+        content.setContent(bodyMimeMultipart);
+        MimeBodyPart bodyPart = new MimeBodyPart();
+
+        StringWriter out = loadFtl();
+        
+        bodyPart.setContent(out.toString(),"text/html;charset=utf-8");
+        bodyMimeMultipart.addBodyPart(bodyPart);
+        mimeMessage.saveChanges();
+        
+        mailSender.send(mimeMessage);
+        return "Template mail sent successfully.";
+    }
+
+    private StringWriter loadFtl() throws TemplateException, IOException {
+        Employee employee = new Employee("Allen", 25 , "male" ,new Date(),"China","13588888888");
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
+        cfg.setClassLoaderForTemplateLoading(ClassLoader.getSystemClassLoader(), "/");
+        Template emailTemplate = cfg.getTemplate("mailTemplate.ftl");
+        StringWriter out = new StringWriter();
+        emailTemplate.process(employee, out);
+        return out;
+    }
 }

@@ -22,7 +22,6 @@ public class Recipient {
 	private String subject;
 
 	// 邮件内容
-    @NotNull
 	private String content;
 
 	public String getMailName() {
