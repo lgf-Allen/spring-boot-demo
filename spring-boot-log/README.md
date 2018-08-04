@@ -18,10 +18,11 @@
 		logging.file.max-history=10
         
 > 输出的日志文件如下图所示 
+
 ![logfile](src/test/resources/logfile.jpg)
 
 ## 1.2 *Spring Boot* 集成*Log4j2* 框架
-> 首先在pom.xml引入如下依赖 (Note:去掉spring-boot-starter-logging的依赖，否则会启动失败)
+> 首先在pom.xml引入如下依赖 (Note:去掉spring-boot-starter-logging的依赖)
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -38,7 +39,11 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		
-> 在src/main/resources下引入log4j2.xml
+> 在src/main/resources下引入*log4j2.xml*,具体的可参考项目中的配置,只是一些简单的配置。
+
+> [log4j2官网](http://logging.apache.org/log4j/2.x/manual/)
+
+	
 
 
         
