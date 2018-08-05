@@ -11,6 +11,7 @@
 poi 框架提供的三种方式比较：HSSF、XSSF、SXSSF
 临时文件：
 >> Windows7： C:\Users\username\AppData\Local\Temp
+--- 
 >> Linux： /var/tmp/
 
 |      Item       |       HSSF      |     XSSF        |        SXSSF      |
