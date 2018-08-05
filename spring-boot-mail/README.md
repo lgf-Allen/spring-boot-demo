@@ -1,13 +1,13 @@
 # Spring Boot integration mail
 
-## 1.1 在`pom.xml`中添加`mail-starter`
+## 1 在`pom.xml`中添加`mail-starter`
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
         
-## 1.2 在application.perperties加入如下配置
+## 2 在application.perperties加入如下配置
 
         # mail server
         spring.mail.host=smtp.qq.com
@@ -26,9 +26,9 @@
 
 > 在浏览器获取授权码的流程:`开始`--\>`登录qq邮箱`--\>`设置`--\>`账户`--\>`POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务`--\>` 生成授权码 `--\>`获得授权码`--\>`结束`
 
-## 1.3 在MailControllerImpl写了3个简单的restful接口
+## 3 在MailControllerImpl写了3个简单的restful接口
 > 注意:下面的请求路径是针对通过spring-boot内嵌tomcat启动时
-### 1.3.1 简单的邮件发送功能接口如下：
+### 3.1 简单的邮件发送功能接口如下：
 * url [http://localhost:8080/simpleMail](http://localhost:8080/simpleMail)
 * Method POST
 * RequestBody
@@ -44,7 +44,7 @@
         {
             "Simple mail sent successfully."
         }
-### 1.3.2 复杂的邮件发送功能：包括发送静态资源，发送附件等功能，接口如下：
+### 3.2 复杂的邮件发送功能：包括发送静态资源，发送附件等功能，接口如下：
 * url [http://localhost:8080/complexMail](http://localhost:8080/complexMail)
 * Method POST
 * RequestBody
@@ -59,7 +59,7 @@
         {
             "Complex mail sent successfully."
         }
-### 1.3.3 集成freemarker，发送模板邮件，接口如下：
+### 3.3 集成freemarker，发送模板邮件，接口如下：
 > 首先加入如下依赖,然后再写一个ftl格式的模板
 
         <dependency>
