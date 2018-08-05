@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+    xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <bean id="requestListener" class="com.allen.spring.listerner.CustomerListener" />
+
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="omsMonitorConnectionFactory" />
+        <property name="destination" ref="jms/omsReplyQueue" />
+        <property name="messageListener" ref="requestListener" />
+    </bean>
+    <!-- 发送队列，同时监听该队列 -->
+    <jee:jndi-lookup id="jms/omsReplyQueue" jndi-name="jms/omsMonitorReplyQueue" />
+    
+    <!-- 此处的springframework connectionFactory id,默认为connnectionFactory,如果不是,需要添加属性primary=true,否则spring boot项目会在启动时,初始jmsTemplate失败 -->
+    <bean id="omsMonitorConnectionFactory" primary="true" class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter"
+        lazy-init="true">
+        <property name="targetConnectionFactory" ref="omsMonitorJndiConnectionFactory" />
+    </bean>
+
+    <jee:jndi-lookup id="omsMonitorJndiConnectionFactory" jndi-name="jms/omsMonitorConnectionFactory" />
+    <!-- send message template -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="omsMonitorJndiConnectionFactory"></property>
+        <property name="receiveTimeout" value="15000"></property>
+        <property name="explicitQosEnabled" value="true"></property>
+        <property name="timeToLive" value="120000"></property>
+    </bean>
+</beans>
