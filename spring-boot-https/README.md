@@ -2,7 +2,7 @@
 
 ## 1 使用JDK keytool.exe运行下面的命令 
 
-		keytoo.exe -genkey -alias selfsigned_localhost_sslserver -keyalg RSA -keysize 2048 		-validity 700 -keypass changeit -storepass changeit -keystore ssl-server.jks
+		keytoo.exe -genkey -alias selfsigned_localhost_sslserver -keyalg RSA -keysize 2048 -validity 700 -keypass changeit -storepass changeit -keystore ssl-server.jks
 	
 ## 2 将生成的ssl-server.jks放到项目的`src/main/resources`下，配置application.properties
 		
@@ -16,7 +16,7 @@
 > 访问url：[https://localhost:8443/secured](https://localhost:8443/secured)
 > 可以看到如下效果
 
-![https](src/main/webapp/https/jpg)
+![https](src/main/webapp/https.jpg)
 
 ## 4 配置从HTTP跳转到HTTPS,添加一个配置类,加入如下代码
 		
