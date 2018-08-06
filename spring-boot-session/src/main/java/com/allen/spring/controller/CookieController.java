@@ -25,7 +25,7 @@ public class CookieController {
             System.out.println("不存在session");
             session.setAttribute("browser", browser);
         } else {
-            System.out.println("存在session,browser is " + sessionBrowser);
+            System.out.println("存在session,browser is " + sessionBrowser.toString());
         }
         Cookie[] cookie = request.getCookies();
         if(cookie != null && cookie.length>0) {
