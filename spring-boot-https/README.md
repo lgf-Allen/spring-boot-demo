@@ -3,7 +3,9 @@
 ## 1 使用JDK keytool.exe运行下面的命令 
 
 		keytoo.exe -genkey -alias selfsigned_localhost_sslserver -keyalg RSA -keysize 2048 -validity 700 -keypass changeit -storepass changeit -keystore ssl-server.jks
-	
+> 生成 步骤如下图所示
+![keyGen.jpg](src/main/webapp/keyGen.jpg)
+
 ## 2 将生成的ssl-server.jks放到项目的`src/main/resources`下，配置application.properties
 		
 		server.port=8443
