@@ -29,7 +29,7 @@
         }
     
     }
-> 启动Spring Boot效果如下图所示
+> 启动Spring Boot,控制台输入如下图所示
 
 ![schedule.jpg](src/main/webapp/image/schedule.jpg)
 ## 4 FAQ
