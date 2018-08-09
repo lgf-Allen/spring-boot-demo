@@ -34,6 +34,18 @@
 ![schedule.jpg](src/main/webapp/image/schedule.jpg)
 ## 4 FAQ
 * 上图中出现的定时任务执行时间是根据当前服务器系统时间进行计算的，比如服务器启动时,服务器时间是`10:58:09`,时间就会首先到达 `10:58:10`执行一次`test1()`,然后`10:58:20`,`10:58:30`,`10:58:40`...都执行一次`test1()`,直到到达`10:59:00`会执行一次`test2()`
-
+* cronExpression
+|     name    |   Required   |   Allowed Values   |  Allow Special Characters  |
+|:-----------:|:------------:|:------------------:|:--------------------------:|
+|    Seconds  |     Y        |       0-59         |        ,-*/                |
+|    Minutes  |     Y        |       0-59         |        ,-*/                |
+|    Hours    |     Y        |       0-23         |        ,-*/                |
+| Day of month|     Y        |       1-31         |        ,-*/? L W C         |
+|    Month    |     Y        |  0-11 or JAN-DEC   |        ,-*/                |
+| Day of week |     Y        |   1-7 or SUN-SAT   |      ,-*/? L C #           |
+|    Year     |     N        | empty or 1970-2099 |        ,-*/                |
+* example
+> 0 0 12 * * /?         `每天下午12点执行`
+> 0 15 10 ? * *         `每天上午10点15分执行`
 ## 5 Tools
 * 自动生成cron表达式:[http://cron.qqe2.com/](http://cron.qqe2.com/)
