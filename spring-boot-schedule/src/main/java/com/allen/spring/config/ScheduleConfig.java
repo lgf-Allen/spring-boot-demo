@@ -27,4 +27,14 @@ public class ScheduleConfig {
         System.out.println("每隔1min打印一次,"+new Date());
     }
     
+    @Scheduled(fixedDelay=3000)
+    public void test3() {
+    	System.out.println("上一个任务执行结束后，延迟3s执行下一次." +new Date());
+    }
+    
+    @Scheduled(fixedRate=5000)
+    public void test4() throws InterruptedException {
+    	System.out.println("无论上一个任务是否执结束，延迟5s执行下一次." + new Date());
+    }
+    
 }
