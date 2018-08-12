@@ -50,12 +50,3 @@
 	* `0 15 10 ? * *`----------------------`每天上午10点15分执行`
 ## 5 Tools
 * 自动生成cron表达式:[http://cron.qqe2.com/](http://cron.qqe2.com/)
-```
-graph TD
-    A[Christmas] --> B(Go shopping)
-    B --> C{Let me think}
-    C --> |One| D[laptop]
-    C --> |Two| E[iPhone]
-    C --> |Three| F[Car]
-```
-```
