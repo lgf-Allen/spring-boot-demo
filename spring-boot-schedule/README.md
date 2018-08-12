@@ -50,3 +50,10 @@
 	* `0 15 10 ? * *`----------------------`每天上午10点15分执行`
 ## 5 Tools
 * 自动生成cron表达式:[http://cron.qqe2.com/](http://cron.qqe2.com/)
+```mermaid
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
