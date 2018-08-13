@@ -41,3 +41,6 @@
             }
         
         }
+
+## 3 参考文章
+* [spring-boot-swagger2](https://mp.weixin.qq.com/s?__biz=MzA4ODIyMzEwMg==&mid=2447533616&idx=1&sn=269192a16202aadbcafd580a0c7c2cc7&chksm=843bba21b34c33378967e40623695dfb38374ecd697b2164bedb1cca28e26852e53629339371&mpshare=1&scene=1&srcid=0808yzl9aBKnkwR3KMKOxx2X#rd)
