@@ -1,9 +1,8 @@
 package com.allen.spring;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-public class ServletInitializer extends SpringBootServletInitializer {
+public class ServletInitializer extends org.springframework.boot.web.servlet.support.SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
