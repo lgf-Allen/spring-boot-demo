@@ -23,6 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <docker.image.prefix>dockerlgf</docker.image.prefix>
+        <com.spotify.version>1.4.4</com.spotify.version>
     </properties>
 
     <dependencies>
@@ -52,20 +53,18 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.4</version>
+                <version>${com.spotify.version}</version>
                 <configuration>
 <!--                     <username>dockerlgf</username> -->
 <!--                     <password>ZG9ja2VybGdmOkRyZWFtMTk5MzA2Mjc=</password> -->
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
-<!--                     <serverId>dockerhub</serverId> -->
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-
 </project>
