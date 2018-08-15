@@ -1,5 +1,4 @@
 # 使用*dockerfile-maven-plugin*构建docker镜像，并push到dockerhub或private registry
-**Note** 目前主流的
 ## 1 请确保开启docker远程API,一般可通过修改`/etc/docker/daemon.json`来完成,修改完成后执行`systemctl daemon-reload`重新加载配置.
 
 ![docker_api.png](src/main/webapp/images/docker_api.png)
@@ -125,8 +124,10 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 ```
 
 > 结合上图和上面的配置,说明如下
-    * mvn package \=\= mvn package + dockerfile:build
-    * mvn deploy  \=\= mvn dockerfile:push + deploy 
+
+* mvn package \=\= mvn package + dockerfile:build
+* mvn deploy  \=\= mvn dockerfile:push + deploy 
+
 ## 8 push镜像到dockerhub或private registry
 > 官网讲到有两种方式
 * **Authenticating with maven pom.xml**:从1.3.XX版本以后,至此在`pom.xml`中直接配置`username`和`password`来完成push到dockerhub或者private registry,或者在命令行执行时指定`mvn goal -Ddockerfile.username=... -Ddockerfile.password=...`
@@ -152,8 +153,8 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     </plugins>
 </build>
 ```
-  * <1>处配置dockerhub或者private registry账号
-  * <2>处配置dockerhub或者private registry密码
+> <1>处配置dockerhub或者private registry账号
+> <2>处配置dockerhub或者private registry密码
 
 * **Authenticating with maven settings.xml**:从1.3.6版本以后,可以通过在maven settings.xml配置server信息,pom.xml只需要添加下面的配置
 
@@ -178,7 +179,8 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
   </server>
 </servers>
 ```
-* 我只测试成功了一种方式,配置如上
+
+> 我只测试成功了一种方式,配置如上
 
 ## 9 执行mvn命令时跳过绑定在maven命令上的dockerfile相关命令
 ![skip_dockerfile.png](src/main/webapp/images/skip_dockerfile.png)
