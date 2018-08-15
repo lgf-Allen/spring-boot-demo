@@ -65,7 +65,7 @@
                 </executions>
                 <configuration>
 <!--                     <username>dockerlgf</username> -->
-<!--                     <password>Dream19930627</password> -->
+<!--                     <password>xxxxxx</password> -->
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <tag>${project.version}</tag>
