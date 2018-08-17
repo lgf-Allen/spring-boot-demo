@@ -6,8 +6,6 @@ package com.allen.spring.controller;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +29,6 @@ public class UserController {
         user.setUserId(userId);
         user.setName("Lisi");
         user.setAge(25);
-        // Self link
-        // Link selfLink = ControllerLinkBuilder
-        // .linkTo(UserController.class)
-        // .slash(user.getUserId())
-        // .withSelfRel();
-        // user.add(selfLink);
         user.add(linkTo(methodOn(UserController.class).findUser(userId)).withSelfRel());
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
