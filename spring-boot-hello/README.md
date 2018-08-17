@@ -1,6 +1,6 @@
 # Spring Boot 
-> 这个demo主要包括三部分:自定义配置文件,禁用特定的自动配置项,根据restdocs并转化成html
-新建一个spring boot项目
+> 这个demo主要包括三部分:自定义配置文件,禁用特定的自动配置项,Spring Rest Docs
+*首先,新建一个spring boot项目*
 ## 1 使用java bean自定义配置文件
 ### 1.1 pom.xml添加相关依赖
 ```
@@ -65,4 +65,4 @@ spring.autoconfigure.exclude[0]=org.springframework.boot.autoconfigure.jdbc.Data
 spring.autoconfigure.exclude[1]=org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 ```
 
-## 3 
+## 3 Spring Rest Docs
