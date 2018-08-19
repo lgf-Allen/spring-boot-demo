@@ -223,3 +223,7 @@ include::{snippets}/user/response-fields.adoc[]
 ```
 
 ![restapi_location.png](src/main/webapp/images/restapi_location.png)
+
+### 3.7 参考资料
+* [Creating API Documentation with Restdocs](https://spring.io/guides/gs/testing-restdocs/)
+* [Spring REST Docs](https://docs.spring.io/spring-restdocs/docs/2.0.3.BUILD-SNAPSHOT/reference/html5/)
