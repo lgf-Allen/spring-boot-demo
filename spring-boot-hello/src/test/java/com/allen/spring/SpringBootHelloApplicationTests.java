@@ -4,6 +4,10 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +32,13 @@ public class SpringBootHelloApplicationTests {
 		this.mockMvc.perform(get("/users/user?username=Lisi"))
 					.andDo(print())
 					.andExpect(status().isOk())
-					.andDo(document("user"));
+					.andDo(document("user" ,
+							requestParameters(parameterWithName("username").description("Username must not be null or empty.")),
+							responseFields(
+									fieldWithPath("username").description("Uername"),
+									fieldWithPath("password").description("Password"),
+									fieldWithPath("age").description("Age"),
+									fieldWithPath("gender").description("Gender"))));
 	}
 
 }

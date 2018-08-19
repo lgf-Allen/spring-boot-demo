@@ -1,0 +1,25 @@
+= Spring Boot Hello REST API Guide
+Allen;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+This is an example output for a service running at http://localhost:8080
+
+[Search-User-By-Username]
+== User Operation By Username
+
+
+.request
+include::{snippets}/user/http-request.adoc[]
+
+.request parameters
+include::{snippets}/user/request-parameters.adoc[]
+
+.response
+include::{snippets}/user/http-response.adoc[]
+
+.response fields
+include::{snippets}/user/response-fields.adoc[]
