@@ -186,6 +186,7 @@ include::{snippets}/user/response-fields.adoc[]
 	* <1> .adoc文件
 	* <2> .adoc文件转化的.html
 	* <3> .MockMVC生成的测试文件
+
 ![test.png](src/main/webapp/images/test.png)
 * .adoc转化成的html文件如下
 ![restapi.png](src/main/webapp/images/restapi.png)
