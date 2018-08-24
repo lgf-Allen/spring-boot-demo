@@ -56,5 +56,6 @@
 > 到[https://localhost:8443/secured](https://localhost:8443/secured)
 
 ## 5 参考文档
+* [https://howtodoinjava.com/spring-boot/spring-boot-ssl-https-example/](https://howtodoinjava.com/spring-boot/spring-boot-ssl-https-example/)
 * [Spring Boot Secured By Let's Encrypt](https://dzone.com/articles/spring-boot-secured-by-lets-encrypt)
 		
