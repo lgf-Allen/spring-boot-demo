@@ -12,6 +12,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 /**
  * @author meng
@@ -45,4 +48,9 @@ public class AuthenticationExample {
 		System.out.println("Successfully authenticated. Security context contains: "
 				+ SecurityContextHolder.getContext().getAuthentication());
 	}
+	
+	public static void main(String[] args) {
+	    PasswordEncoder  encoder = new BCryptPasswordEncoder();
+	    encoder.encode("password");
+    }
 }

@@ -20,7 +20,11 @@ import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.allen.spring.config.Person;
 
 /**
  * @author first
@@ -241,6 +245,11 @@ public class HelloController {
         items.add("Avg.");
         items.add("%");
         return items;
+    }
+    
+    @RequestMapping(path="/user")
+    public String get(Person son) {
+        return null;
     }
     
 }

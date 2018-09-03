@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.allen.spring.boot.thread;
+package com.allen.spring.boot.thread.api;
 
 import java.util.stream.IntStream;
 
