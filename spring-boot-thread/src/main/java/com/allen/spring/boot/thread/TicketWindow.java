@@ -13,6 +13,7 @@ public class TicketWindow extends Thread {
     private final String name;
     
     private static final int MAX = 50;
+    //static 保证只实例化一次
     private static int index = 1;
     public TicketWindow(String name) {
       this.name = name;
