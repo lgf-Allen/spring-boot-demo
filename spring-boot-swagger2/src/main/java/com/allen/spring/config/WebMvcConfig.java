@@ -27,6 +27,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //映射日志文件:http://localhost:8080/logs/spring-boot-swagger2.txt
+        registry.addResourceHandler("logs/**").addResourceLocations("file:applog/logs/");
         //添加处理swagger静态页面的映射
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/");
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
