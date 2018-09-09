@@ -1,0 +1,6 @@
+logging:
+  file: applog/logs/spring-boot-docker.txt
+  level:
+    root: info
+server:
+  port: 8001
