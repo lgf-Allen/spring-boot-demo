@@ -1,8 +1,7 @@
-package com.huawei.demo.controller;
+package com.allen.demo.controller;
 
-import com.huawei.demo.entity.User;
-import com.huawei.demo.service.IUserService;
-import com.huawei.demo.service.UserServiceImpl;
+import com.allen.demo.entity.User;
+import com.allen.demo.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

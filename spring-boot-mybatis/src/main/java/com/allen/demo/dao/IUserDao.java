@@ -1,6 +1,6 @@
-package com.huawei.demo.dao;
+package com.allen.demo.dao;
 
-import com.huawei.demo.entity.User;
+import com.allen.demo.entity.User;
 
 
 public interface IUserDao {

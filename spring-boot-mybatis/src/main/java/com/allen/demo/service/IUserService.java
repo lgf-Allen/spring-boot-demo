@@ -1,6 +1,6 @@
-package com.huawei.demo.service;
+package com.allen.demo.service;
 
-import com.huawei.demo.entity.User;
+import com.allen.demo.entity.User;
 
 public interface IUserService {
 

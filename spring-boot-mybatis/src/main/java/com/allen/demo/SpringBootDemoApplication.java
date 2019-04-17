@@ -1,4 +1,4 @@
-package com.huawei.demo;
+package com.allen.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

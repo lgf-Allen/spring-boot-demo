@@ -1,4 +1,4 @@
-package com.huawei.demo.entity;
+package com.allen.demo.entity;
 
 public class User {
 

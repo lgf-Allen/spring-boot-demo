@@ -1,15 +1,14 @@
-package com.huawei.demo.dao;
+package com.allen.demo.dao;
 
-import com.huawei.demo.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.allen.demo.entity.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 @Repository
-@Transactional
 public class UserDaoImpl implements IUserDao {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override

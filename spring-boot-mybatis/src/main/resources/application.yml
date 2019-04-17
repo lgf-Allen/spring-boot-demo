@@ -1,0 +1,14 @@
+server:
+  port: 8003
+spring:
+  datasource:
+    continue-on-error:
+    username: root
+    password: 0108
+    url: jdbc:mysql://192.168.0.102:3306/mysql_test?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    initialization-mode: always
+#    platform: mysql
+#    schema: classpath:schema.sql
+#    schema-username: root
+#    schema-password: 0108
