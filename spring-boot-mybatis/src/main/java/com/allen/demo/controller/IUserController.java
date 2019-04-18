@@ -1,14 +1,17 @@
-package com.allen.demo.service;
+package com.allen.demo.controller;
 
 import com.allen.demo.entity.User;
 
-public interface IUserService {
+public interface IUserController {
 
     User getUserByName(String name);
 
-    void insertUserInfo(String name, Integer age);
+    void createUser(User user);
 
     void updateUser(User user);
 
     void deleteUser(Long id);
+
 }
+
+

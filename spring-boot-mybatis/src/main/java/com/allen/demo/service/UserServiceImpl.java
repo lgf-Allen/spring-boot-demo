@@ -18,4 +18,14 @@ public class UserServiceImpl implements IUserService{
     public void insertUserInfo(String name, Integer age){
         userDao.insertUser(name, age);
     }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.updatUser(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userDao.deleteUserById(id);
+    }
 }

@@ -18,6 +18,16 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public void insertUser(String name, Integer age) {
-        userMapper.insert(name, age);
+        int res = userMapper.insert(name, age);
+    }
+
+    @Override
+    public void updatUser(User user) {
+        int res = userMapper.updateUserById(user.getId(), user.getName(), user.getAge());
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        int res = userMapper.deleteUserById(id);
     }
 }

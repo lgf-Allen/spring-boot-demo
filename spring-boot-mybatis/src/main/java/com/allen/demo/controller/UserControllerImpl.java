@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/users")
-public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+public class UserControllerImpl implements IUserController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerImpl.class);
 
     @Autowired
     private IUserService userService;
 
     @GetMapping
+    @Override
     public User getUserByName(@RequestParam("name")String name){
         LOGGER.info("Search user by name: {}", name);
         User user = userService.getUserByName(name);
@@ -24,9 +25,22 @@ public class UserController {
     }
 
     @PostMapping
+    @Override
     public void createUser(@RequestBody User user){
         userService.insertUserInfo(user.getName(), user.getAge());
         LOGGER.info("create user is {}", user.toString());
+    }
+
+    @PutMapping
+    @Override
+    public void updateUser(@RequestBody User user) {
+        userService.updateUser(user);
+    }
+
+    @DeleteMapping
+    @Override
+    public void deleteUser(@RequestParam("id") Long id) {
+        userService.deleteUser(id);
     }
 
 }
