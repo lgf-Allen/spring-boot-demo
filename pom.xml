@@ -15,6 +15,7 @@
 
     <modules>
         <module>spring-boot-mybatis</module>
+        <module>spring-boot-jpa</module>
     </modules>
 
     <properties>
@@ -51,6 +52,12 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring.boot.version}</version>
             </dependency>
 
             <!-- spring boot test-->
