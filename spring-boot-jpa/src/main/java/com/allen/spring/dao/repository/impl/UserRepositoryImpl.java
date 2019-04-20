@@ -11,4 +11,5 @@ import com.allen.spring.dao.repository.UserCustom;
  */
 public class UserRepositoryImpl implements UserCustom {
 
+
 }
