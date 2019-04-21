@@ -1,16 +1,10 @@
 package com.allen.spring.boot.controller.impl;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.Date;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.validation.Valid;
-
+import com.allen.spring.boot.bean.Employee;
+import com.allen.spring.boot.bean.Recipient;
+import com.allen.spring.boot.controller.MailController;
+import freemarker.core.ParseException;
+import freemarker.template.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.allen.spring.boot.bean.Employee;
-import com.allen.spring.boot.bean.Recipient;
-import com.allen.spring.boot.controller.MailController;
-
-import freemarker.core.ParseException;
-import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateNotFoundException;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Date;
 
 /**
  * Created by meng on 2018/8/4.
@@ -54,8 +47,8 @@ public class MailControllerImpl implements MailController {
         String subject = recipient.getSubject();
         String text = recipient.getContent();
         SimpleMailMessage message = new SimpleMailMessage();
-        // 设置发件人地址
-        message.setFrom("xxxxx@qq.com");
+        // 设置发件人地址,此处需要跟application.properties中的spring.mail.username保持一致
+        message.setFrom("xxx@qq.com");
         message.setTo(mailAddress);
         message.setSubject(subject);
         message.setText(text);
@@ -74,17 +67,18 @@ public class MailControllerImpl implements MailController {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom("xxxxxx@qq.com");
+        // 设置发件人地址,此处需要跟application.properties中的spring.mail.username保持一致
+        helper.setFrom("xxx@qq.com");
         helper.setTo(mailAddress);
         helper.setSubject(subject);
         // 嵌入静态资源
         helper.setText("<html><body><img src=\"cid:peppa\" ></body></html>", true);
-        Resource peppa = new ClassPathResource("peppa.jpg");
+        Resource peppa = new ClassPathResource("images/peppa.jpg");
         // 此处的"peppa"与静态页面中的"cid:peppa"相对应
         helper.addInline("peppa", peppa);
 
         // 添加附件，此处是从classpath路径下拿到这个文件
-        Resource file = new ClassPathResource("qq_authKey.png");
+        Resource file = new ClassPathResource("images/qq_authKey.png");
         helper.addAttachment(file.getFilename(), file);
 
         mailSender.send(mimeMessage);
@@ -102,7 +96,8 @@ public class MailControllerImpl implements MailController {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         mimeMessage.addRecipients(Message.RecipientType.TO, mailAddress);
-        mimeMessage.setFrom("xxxxxx@qq.com");
+        // 设置发件人地址,此处需要跟application.properties中的spring.mail.username保持一致
+        mimeMessage.setFrom("xxx@qq.com");
         mimeMessage.setSubject(subject);
 
         MimeMultipart mixed = new MimeMultipart("mixed");

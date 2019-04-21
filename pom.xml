@@ -17,6 +17,7 @@
         <module>spring-boot-mybatis</module>
         <module>spring-boot-jpa</module>
         <module>spring-boot-log</module>
+        <module>spring-boot-mail</module>
     </modules>
 
     <properties>
@@ -67,6 +68,20 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <!-- mail -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <!-- freemarker -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
 
