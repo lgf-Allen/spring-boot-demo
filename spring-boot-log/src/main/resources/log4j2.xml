@@ -2,7 +2,7 @@
 <!--Configuration > status设置log4j2的自身log级别-->
 <!--Configuration > monitorInterval：修改配置文件时,Log4j自动刷新配置的间隔秒数-->
 <!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
-<Configuration status="ERROR" monitorInterval="30" >
+<Configuration status="INFO" monitorInterval="30" >
     <Properties>
     	<!-- 设置一个属性，代表项目名  -->
         <Property name="CONTEXTNAME">spring-boot-log</Property>
@@ -14,13 +14,14 @@
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="${LOG_PATTERN}" />
         </Console>
-        <!-- 输出到文件 -->
-        <RollingFile name="RollingFileInfo" fileName="applog/logs/${CONTEXTNAME}.txt"
+         输出到文件
+        <RollingFile name="RollingFile" fileName="applog/logs/${CONTEXTNAME}.txt"
             filePattern="${CONTEXTNAME}-%d{yyyy-MM-dd}-%i.txt">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>
             	<!-- 触发归档策略 -->
                 <TimeBasedTriggeringPolicy />
+                <!-- 限制单个日志文件的大小 -->
                 <SizeBasedTriggeringPolicy size="10MB" />
             </Policies>
             <!-- 循环归档策略  -->
@@ -38,58 +39,58 @@
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingFile>
-<!--         <RollingFile name="RollingFileInfo" fileName="applog/logs/${CONTEXTNAME}-info.txt" -->
-<!--             filePattern="applog/logs/${CONTEXTNAME}-info-%d{yyyy-MM-dd}-%i.txt"> -->
-<!--             <Filters> -->
-<!-- 				控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
-<!--                 <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/> -->
-<!--             </Filters> -->
-<!--             <PatternLayout pattern="${LOG_PATTERN}" /> -->
-<!--             <Policies> -->
-<!--                 <TimeBasedTriggeringPolicy /> -->
-<!--                 <SizeBasedTriggeringPolicy size="10MB" /> -->
-<!--             </Policies> -->
-<!--         </RollingFile> -->
-<!--         <RollingFile name="RollingFileDebug" fileName="applog/logs/${CONTEXTNAME}-debug.txt" -->
-<!--             filePattern="applog/logs/${CONTEXTNAME}-debug-%d{yyyy-MM-dd}-%i.txt"> -->
-<!--             <Filters> -->
-<!-- 				控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
-<!--                 <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/> -->
-<!--             </Filters> -->
-<!--             <PatternLayout pattern="${LOG_PATTERN}" /> -->
-<!--             <Policies> -->
-<!--                 <TimeBasedTriggeringPolicy /> -->
-<!--                 <SizeBasedTriggeringPolicy size="10MB" /> -->
-<!--             </Policies> -->
-<!--         </RollingFile> -->
-<!--         <RollingFile name="RollingFileError" fileName="applog/logs/${CONTEXTNAME}-error.txt" -->
-<!--             filePattern="applog/logs/${CONTEXTNAME}-error-%d{yyyy-MM-dd}-%i.txt"> -->
-<!--             <Filters> -->
-<!-- 				控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
-<!--                 <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/> -->
-<!--             </Filters> -->
-<!--             <PatternLayout pattern="${LOG_PATTERN}" /> -->
-<!--             <Policies> -->
-<!--                 <TimeBasedTriggeringPolicy /> -->
-<!--                 <SizeBasedTriggeringPolicy size="10MB" /> -->
-<!--             </Policies> -->
-<!--         </RollingFile> -->
+         <RollingFile name="RollingFileInfo" fileName="${user.home}/logs/${CONTEXTNAME}-info.txt"
+             filePattern="applog/logs/${CONTEXTNAME}-info-%d{yyyy-MM-dd}-%i.txt">
+             <Filters>
+ 				<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+                 <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+             </Filters>
+             <PatternLayout pattern="${LOG_PATTERN}" />
+             <Policies>
+                 <TimeBasedTriggeringPolicy />
+                 <SizeBasedTriggeringPolicy size="10MB" />
+             </Policies>
+         </RollingFile>
+         <RollingFile name="RollingFileDebug" fileName="applog/logs/${CONTEXTNAME}-debug.txt"
+             filePattern="applog/logs/${CONTEXTNAME}-debug-%d{yyyy-MM-dd}-%i.txt">
+             <Filters>
+ 				<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+                 <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+             </Filters>
+             <PatternLayout pattern="${LOG_PATTERN}" />
+             <Policies>
+                 <TimeBasedTriggeringPolicy />
+                 <SizeBasedTriggeringPolicy size="10MB" />
+             </Policies>
+         </RollingFile>
+         <RollingFile name="RollingFileError" fileName="applog/logs/${CONTEXTNAME}-error.txt"
+             filePattern="applog/logs/${CONTEXTNAME}-error-%d{yyyy-MM-dd}-%i.txt">
+             <Filters>
+ 				<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+                 <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+             </Filters>
+             <PatternLayout pattern="${LOG_PATTERN}" />
+             <Policies>
+                 <TimeBasedTriggeringPolicy />
+                 <SizeBasedTriggeringPolicy size="10MB" />
+             </Policies>
+         </RollingFile>
 		<!-- 异步appender -->
         <Async name="Async">
-            <AppenderRef ref="RollingFileInfo" />
+            <AppenderRef ref="RollingFile" />
         </Async>
     </Appenders>
     <Loggers>
         <logger name="com.allen.spring.controller" level="info" ></logger>
         <Root level="info">
        		<!-- 打印到控制台  -->
-            <appender-ref ref="STDOUT" /> 
-            <!-- 打印到文件 -->
+            <appender-ref ref="STDOUT" />
+            <!-- 使用异步方式打印日志到文件 -->
             <appender-ref ref="Async" />
-				<!-- 使用filter 将不同级别的日志打印到不同的文件中  -->
-<!-- 			<appender-ref ref="RollingFileInfo" /> -->
-<!-- 			<appender-ref ref="RollingFileDebug" /> -->
-<!-- 			<appender-ref ref="RollingFileError" /> -->
+            <!-- 使用filter 将不同级别的日志打印到不同的文件中  -->
+ 			<appender-ref ref="RollingFileInfo" />
+ 			<appender-ref ref="RollingFileDebug" />
+ 			<appender-ref ref="RollingFileError" />
         </Root>
     </Loggers>
 </Configuration>
