@@ -18,6 +18,7 @@
         <module>spring-boot-jpa</module>
         <module>spring-boot-log</module>
         <module>spring-boot-mail</module>
+        <module>spring-boot-https</module>
     </modules>
 
     <properties>
