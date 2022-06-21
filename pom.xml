@@ -31,7 +31,7 @@
         <org.asciidoctor.version>1.5.3</org.asciidoctor.version>
         <war.version>2.6</war.version>
         <mybatis.version>2.0.1</mybatis.version>
-        <mysql.version>8.0.15</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
 
     <dependencyManagement>
